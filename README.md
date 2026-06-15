@@ -105,8 +105,6 @@ If you use this code, please cite the paper:
 }
 ```
 
-Paper page: [https://arxiv.org/abs/2603.29924](https://arxiv.org/abs/2603.29924)
-
 ## License
 
 This repository is released under the license in [LICENSE](/mnt/d/hyf_workspace/Abstraction_in_Style/LICENSE).
