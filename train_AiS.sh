@@ -9,26 +9,26 @@ export MASK_DIR="$MASK_DIR"
 export WANDB_API_KEY="Your WANDB_API_KEY"
 export WANDB_MODE="offline"
 
-# Styles to train, in order.
-STYLE_ORDER=(
+# Style folders to train.
+STYLE_FOLDERS=(
     "Fluffy_Brush"
 )
 
-# Always train both phases.
-TRAIN_PHASES=("A-VAT" "S-VAT")
+# Always train both stages.
+TRAIN_STAGES=("A-VAT" "S-VAT")
 
-# Phase-to-directory mapping.
-declare -A INSTANCE_SUFFIX
-declare -A OUTPUT_SUFFIX
+# Stage-to-directory mapping.
+declare -A TRAIN_DATA_DIRS
+declare -A CHECKPOINT_DIRS
 
-INSTANCE_SUFFIX["A-VAT"]="A-VAT_train_Data"
-INSTANCE_SUFFIX["S-VAT"]="S-VAT_train_Data"
+TRAIN_DATA_DIRS["A-VAT"]="A-VAT_train_Data"
+TRAIN_DATA_DIRS["S-VAT"]="S-VAT_train_Data"
 
-OUTPUT_SUFFIX["A-VAT"]="A-VAT_checkpoint"
-OUTPUT_SUFFIX["S-VAT"]="S-VAT_checkpoint"
+CHECKPOINT_DIRS["A-VAT"]="A-VAT_checkpoint"
+CHECKPOINT_DIRS["S-VAT"]="S-VAT_checkpoint"
 
-# Train each style in order.
-for style_name in "${STYLE_ORDER[@]}"; do
+# Train each style.
+for style_name in "${STYLE_FOLDERS[@]}"; do
     style_dir="$ROOT_DIR/$style_name"
 
     if [ ! -d "$style_dir" ]; then
@@ -36,13 +36,13 @@ for style_name in "${STYLE_ORDER[@]}"; do
         continue
     fi
 
-    for mode in "${TRAIN_PHASES[@]}"; do
+    for phase in "${TRAIN_STAGES[@]}"; do
 
-        INSTANCE_DIR="$style_dir/${INSTANCE_SUFFIX[$mode]}"
-        OUTPUT_DIR="$style_dir/${OUTPUT_SUFFIX[$mode]}"
+        INSTANCE_DIR="$style_dir/${TRAIN_DATA_DIRS[$phase]}"
+        OUTPUT_DIR="$style_dir/${CHECKPOINT_DIRS[$phase]}"
 
         if [ ! -d "$INSTANCE_DIR" ]; then
-            echo "Warning: $INSTANCE_DIR does not exist, skipping $style_name ($mode)"
+            echo "Warning: $INSTANCE_DIR does not exist, skipping $style_name ($phase)"
             continue
         fi
 
@@ -50,8 +50,8 @@ for style_name in "${STYLE_ORDER[@]}"; do
 
         echo "========================================"
         echo "Start training"
-        echo "STYLE : $style_name"
-        echo "MODE  : $mode"
+        echo "Style : $style_name"
+        echo "Phase : $phase"
         echo "Instance dir: $INSTANCE_DIR"
         echo "Output dir  : $OUTPUT_DIR"
         echo "========================================"
@@ -83,7 +83,7 @@ for style_name in "${STYLE_ORDER[@]}"; do
             --num_validation_images=1 \
             --seed="42"
 
-        echo "Completed training: $style_name ($mode)"
+        echo "Completed training: $style_name ($phase)"
         echo "========================================"
         echo ""
     done
