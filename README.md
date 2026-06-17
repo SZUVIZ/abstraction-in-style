@@ -148,7 +148,7 @@ Existing methods often preserve the input structure too rigidly, which limits th
 
 ```bibtex
 @misc{lu2026abstractionstyle,
-  title={Abstraction in Style: Beyond Texture and Color},
+  title={Abstraction in Style},
   author={Min Lu and Yuanfeng He and Anthony Chen and Jianhuang He and Pu Wang and Daniel Cohen-Or and Hui Huang},
   year={2026},
   eprint={2603.29924},
