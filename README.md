@@ -1,11 +1,11 @@
 # Abstraction in Style: Beyond Texture and Color
 
-Official code for the paper [**Abstraction in Style: Beyond Texture and Color**](https://arxiv.org/abs/2603.29924).
+Official code for the paper [Abstraction in Style: Beyond Texture and Color](https://arxiv.org/abs/2603.29924).
 
 Project page: [https://chapai24.github.io/AiS_gh_pages/](https://chapai24.github.io/AiS_gh_pages/)
 
 <p align="center">
-  <img src="docs/readme_assets/teaser.jpg" alt="AiS teaser" width="78%">
+  <img src="docs/readme_assets/teaser.jpg" alt="AiS teaser" width="90%">
 </p>
 
 AiS studies a part of style transfer that many methods miss: style is not only texture and color, but also abstraction of structure. Instead of forcing the target image to keep its original geometry, AiS separates the process into two stages:
@@ -30,7 +30,7 @@ bash install_env.sh
 AiS formulates stylized image generation as a two-stage Visual Analogy Transfer pipeline. First, `A-VAT` interprets the target image using the abstraction behavior seen in the reference exemplars and produces an abstraction proxy. Then, `S-VAT` turns that proxy into the final stylized output while matching the visual appearance of the chosen style.
 
 <p align="center">
-  <img src="docs/readme_assets/VAT.jpg" alt="AiS pipeline overview" width="60%">
+  <img src="docs/readme_assets/VAT.jpg" alt="AiS pipeline overview" width="80%">
 </p>
 
 Within this shared VAT framework, `A-VAT` learns structural abstraction from analogy layouts, while `S-VAT` learns the mapping from proxy to final rendering. In practice, both stages are implemented with a diffusion transformer and lightweight LoRA adapters.
@@ -119,13 +119,13 @@ test_assets/generated_images/
 The generation process is illustrated in more detail below. For each target image, AiS first builds a style-agnostic backbone, then uses `A-VAT` to produce an abstraction proxy, and finally uses `S-VAT` to render the stylized output.
 
 <p align="center">
-  <img src="docs/readme_assets/generated_examples.png" alt="AiS generated examples details" width="82%">
+  <img src="docs/readme_assets/generated_examples.png" alt="AiS generated examples details" width="90%">
 </p>
 
 A broad gallery of stylized results across multiple targets and reference styles is shown below. Each row uses one reference style, while each column corresponds to a different target image. This highlights that AiS can apply one style consistently to varied content.
 
 <p align="center">
-  <img src="docs/readme_assets/gallery.png" alt="AiS generated examples" width="82%">
+  <img src="docs/readme_assets/gallery.png" alt="AiS generated examples" width="90%">
 </p>
 
 ## Independent Control of Structure and Style
@@ -133,7 +133,7 @@ A broad gallery of stylized results across multiple targets and reference styles
 AiS can mix different structural abstractions with different rendering styles. With the same `S-VAT`, outputs can share texture and color while keeping different geometries from different `A-VAT` models.
 
 <p align="center">
-  <img src="docs/readme_assets/hybrid.png" alt="Independent control of structure and style" width="88%">
+  <img src="docs/readme_assets/hybrid.png" alt="Independent control of structure and style" width="100%">
 </p>
 
 ## Comparison with State-of-the-Art Methods
@@ -141,7 +141,7 @@ AiS can mix different structural abstractions with different rendering styles. W
 Existing methods often preserve the input structure too rigidly, which limits their ability to model abstract artistic styles. AiS is designed to capture both stylistic appearance and structural reinterpretation.
 
 <p align="center">
-  <img src="docs/readme_assets/compare.png" alt="Comparison with state-of-the-art methods" width="82%">
+  <img src="docs/readme_assets/compare.png" alt="Comparison with state-of-the-art methods" width="90%">
 </p>
 
 ## Citation
