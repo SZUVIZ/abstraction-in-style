@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AiS</title>
+<!-- 引用 .ico 格式的 favicon -->
+<link rel="icon" href="static/uno_files/AiS.png" type="image/png">
+
+<!-- Common stylesheet -->
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet">
+<link href="static/css/bulma.min.css" rel="stylesheet">
+<link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="static/css/bulma-slider.min.css">
+<link href="static/css/fontawesome.all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+<link href="static/css/style.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Chewy:regular" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script:regular" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Patrick+Hand&family=Indie+Flower&family=Schoolbell&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="column has-text-centered hero-header">
+  <br>
+  <br>
+  <h1 class="title is-1 publication-title">
+    <!--    <img id="title-icon" src="static/uno_files/teaser/AiS.png" alt="Icon">-->
+    <span class="paper-title-main"><strong>Abstraction in Style: Beyond Texture and Color</strong></span>
+    <br>
+<!--    <span class="paper-title-sub"><strong>Disentangling shape from appearance for image style transfer</strong></span>-->
+  </h1>
+
+  <p id="authors" class="notranslate" translate="no">
+    <span class="author-item"><a href="https://deardeer.github.io/" target="_blank" rel="noopener noreferrer">Min Lu</a><sup>1</sup></span>
+    <span class="author-item"><a target="_blank" rel="noopener noreferrer">Yuanfeng He</a><sup>1</sup></span>
+    <span class="author-item"><a target="_blank" rel="noopener noreferrer">Anthony Chen</a><sup>2</sup></span>
+    <span class="author-item"><a target="_blank" rel="noopener noreferrer">Jianhuang He</a><sup>1</sup></span>
+    <span class="author-item"><a target="_blank" rel="noopener noreferrer">Pu Wang</a><sup>1</sup></span>
+    <span class="author-item"><a href="https://danielcohenor.com/" target="_blank" rel="noopener noreferrer">Daniel Cohen-Or</a><sup>3</sup></span>
+    <span class="author-item"><a href="https://vcc.tech/~huihuang" target="_blank" rel="noopener noreferrer">Hui Huang</a><sup>1</sup><sup>*</sup></span>
+    <br>
+    <span class="affiliation-line"><sup>1</sup>Shenzhen University&nbsp;&nbsp;<sup>2</sup>Peking University&nbsp;&nbsp;<sup>3</sup>Tel Aviv University</span>
+    <br>
+    <span class="affiliation-line"><sup>*</sup>Corresponding Author</span>
+    <br>
+    <span class="conference-line">SIGGRAPH 2026</span>
+  </p>
+
+  <div class="column has-text-centered">
+    <div class="publication-links">
+      <!-- PDF Link. -->
+      <span class="link-block">
+        <a href="https://arxiv.org/abs/2603.29924"
+           class="external-link button is-normal is-rounded is-dark">
+          <span class="icon">
+            <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 578 578" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>
+          </span>
+          <span>Paper</span>
+        </a>
+      </span>
+
+      <!-- Code Link. -->
+      <span class="link-block">
+        <a href="https://github.com/ChaPai24/Abstraction-in-Style"
+           class="external-link button is-normal is-rounded is-dark">
+          <span class="icon">
+            <svg class="svg-inline--fa fa-github fa-w-16" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>
+          </span>
+          <span>Code</span>
+          </a>
+      </span>
+
+    </div>
+  </div>
+</div>
+
+
+<img class="summary-img" src="static/uno_files/teaser.jpg" style="width:60%;" alt="AiS teaser image">
+
+
+<br>
+<div class="content_two">
+  <!-- <div class="hero-body" style="background: #f7fbfb;width: 100%"></div> -->
+  <h2 style="text-align:center; color:#000000;"><b>Abstract</b></h2>
+  <br>
+  <p style="color:#000000;">Artistic styles often embed abstraction beyond surface appearance, involving deliberate reinterpretation of structure rather than mere changes in texture or color. Conventional style transfer methods typically preserve the input geometry and therefore struggle to capture this deeper abstraction behavior, especially for illustrative and non-photorealistic styles. In this work, we introduce Abstraction in Style (AiS), a generative framework that separates structural abstraction from visual stylization. Given a target image and a small set of style exemplars, AiS first derives an intermediate abstraction proxy that reinterprets the target’s structure in accordance with the abstraction logic exhibited by the style. The proxy captures semantic structure while relaxing geometric fidelity, enabling subsequent stylization to operate on an abstracted representation rather than the original image. In a second stage, the abstraction proxy is rendered to produce the final stylized output, preserving visual coherence with the reference style. Both stages are implemented using a shared image-space analogy, enabling transformations to be learned from visual exemplars without explicit geometric supervision. By decoupling abstraction from appearance and treating abstraction as an explicit, transferable process, AiS supports a wider range of stylistic transformations, improves controllability, and enables more expressive stylization.</p>
+</div>
+<br>
+
+<br>
+<div class="content_two">
+  <!-- <div class="hero-body" style="background: #f7fbfb;width: 100%"></div> -->
+  <h2 style="text-align:center; color:#000000;"><b>How does it work?</b></h2><br>
+
+  <video class="summary-img no-interaction-video" style="width:60%;" autoplay muted loop playsinline>
+    <source src="static/uno_files/abstract_in_style_new.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+  <br>
+  <p style="color:#000000;">
+    Abstraction in Style (AiS) formulates stylized image generation as a two-stage process: first, the target image is transformed into an abstraction proxy by <span style="font-weight:600;">A-VAT</span>, which reinterprets its structure according to the abstraction logic of the reference exemplars; then, the proxy is rendered into the final stylized output by <span style="font-weight:600;">S-VAT</span>, which matches the visual appearance of the reference style.
+  </p>
+  <br>
+  <img class="summary-img" src="static/uno_files/VAT.jpg" style="width:60%;">
+  <br>
+  <p style="color:#000000;">
+      The two stages are implemented within a shared Visual Analogy Transfer (VAT) framework, where <span style="font-weight:600;">A-VAT</span> learns image-space transformations from 2×2 analogy layouts of the form A &rarr; A&#8242; :: B &rarr; B&#8242; for structural abstraction, while <span style="font-weight:600;">S-VAT</span> learns the corresponding Proxy &rarr; Output mapping for visual stylization. In practice, VAT is realized with a diffusion transformer and a lightweight LoRA adapter, enabling the model to infer the missing panel B&#8242; from the visible reference pair and the input B, thereby supporting both structural abstraction and visual stylization within a unified framework.
+  </p>
+</div>
+<br>
+
+<!--<div class="content_two">-->
+<!--  <h2 style="text-align:center; color:#000000;"><b>Generalization Capabilities</b></h2><br>-->
+
+<!--      &lt;!&ndash; slider r->l &ndash;&gt;-->
+<!--      &lt;!&ndash;  <div class="carousel-container">&ndash;&gt;-->
+<!--      &lt;!&ndash;  <div class="carousel carousel-scroll-left">&ndash;&gt;-->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop1 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;     &lt;!&ndash; loop1 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/2.png" alt="Image 2">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/7.png" alt="Image 7">&ndash;&gt;-->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop2 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/2.png" alt="Image 2">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/stylize/7.png" alt="Image 7">&ndash;&gt;-->
+<!--      &lt;!&ndash;  </div>&ndash;&gt;-->
+<!--      &lt;!&ndash;</div>&ndash;&gt;-->
+<!--      -->
+<!--      &lt;!&ndash; slider l->r &ndash;&gt;-->
+<!--      &lt;!&ndash;<div class="carousel-container">&ndash;&gt;-->
+<!--      &lt;!&ndash;  <div class="carousel carousel-scroll-right">&ndash;&gt;-->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop1 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/2.png" alt="Image 2">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      -->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop2 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/2.png" alt="Image 2">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/remove/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      &lt;!&ndash;  </div>&ndash;&gt;-->
+<!--      &lt;!&ndash;</div>&ndash;&gt;-->
+<!--      -->
+<!--      &lt;!&ndash; slider r->l &ndash;&gt;-->
+<!--      &lt;!&ndash;<div class="carousel-container">&ndash;&gt;-->
+<!--      &lt;!&ndash;  <div class="carousel carousel-scroll-left">&ndash;&gt;-->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop1 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/2.png" alt="Image 2">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/7.png" alt="Image 7">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/8.png" alt="Image 8">&ndash;&gt;-->
+<!--      &lt;!&ndash;    &ndash;&gt;-->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop2 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/2.png" alt="Image 2">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/7.png" alt="Image 7">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/human_edit/8.png" alt="Image 8">&ndash;&gt;-->
+<!--      &lt;!&ndash;  </div>&ndash;&gt;-->
+<!--      &lt;!&ndash;</div>&ndash;&gt;-->
+<!--      -->
+<!--      &lt;!&ndash; slider l->r &ndash;&gt;-->
+<!--      &lt;!&ndash;<div class="carousel-container">&ndash;&gt;-->
+<!--      &lt;!&ndash;  <div class="carousel carousel-scroll-right">&ndash;&gt;-->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop1 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/2.png" alt="Image 2">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/7.png" alt="Image 7">&ndash;&gt;-->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop2 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/2.png" alt="Image 2">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/general/7.png" alt="Image 7">&ndash;&gt;-->
+<!--      &lt;!&ndash;  </div>&ndash;&gt;-->
+<!--      &lt;!&ndash;</div>&ndash;&gt;-->
+<!--      -->
+<!--      &lt;!&ndash; slider r->l &ndash;&gt;-->
+<!--      &lt;!&ndash;<div class="carousel-container">&ndash;&gt;-->
+<!--      &lt;!&ndash;  <div class="carousel carousel-scroll-left">&ndash;&gt;-->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop1 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/2.png" alt="Image 2">    &ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      &lt;!&ndash;    &lt;!&ndash; loop2 &ndash;&gt;&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/1.png" alt="Image 1">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/2.png" alt="Image 2">    &ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/3.png" alt="Image 3">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/4.png" alt="Image 4">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/5.png" alt="Image 5">&ndash;&gt;-->
+<!--      &lt;!&ndash;    <img src="static/uno_files/slider/add/6.png" alt="Image 6">&ndash;&gt;-->
+<!--      &lt;!&ndash;  </div>&ndash;&gt;-->
+<!--      &lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>  -->
+
+<br>
+<div class="content_two">
+
+  <h2 style="text-align:center; color:#000000;"><b>Generated examples</b></h2>
+  <br>
+  <div class="gallery-carousel gallery-style-pill" data-gallery-carousel data-gallery-mode="smooth">
+    <button class="gallery-nav gallery-nav-prev" type="button" aria-label="Show previous gallery image">‹</button>
+    <div class="gallery-viewport gallery-viewport-smooth">
+      <div class="gallery-card is-active">
+        <img class="summary-img" src="static/uno_files/gallery_1.png" alt="Generated examples page 1">
+      </div>
+      <div class="gallery-card">
+        <img class="summary-img" src="static/uno_files/gallery_2.png" alt="Generated examples page 2">
+      </div>
+    </div>
+    <button class="gallery-nav gallery-nav-next" type="button" aria-label="Show next gallery image">›</button>
+  </div>
+  <br>
+  <p style="color:#000000;">
+      Each column corresponds to a different target image. Each row corresponds to a different reference style (with one exemplar shown per style), which is applied to all targets in that row.
+  </p>
+  <br>
+
+<!--  <br>-->
+<!--  <img class="summary-img" src="static/uno_files/Generated%20examples.png" style="width:100%;">-->
+    <video class="summary-img no-interaction-video" style="width:100%;" autoplay muted loop playsinline>
+    <source src="static/uno_files/show.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+
+  <p style="color:#000000;">
+      For each target image, its style-agnostic hidden backbone is first generated. For each reference style, the system uses a trained A-VAT to generate an abstraction proxy (left grayscale image in each pair), which is then stylized via the corresponding S-VAT to create the final result (right image in the pair).
+  </p>
+  <br>
+
+</div>
+<br>
+
+<br>
+<div class="content_two">
+
+  <h2 style="text-align:center; color:#000000;"><b>Independent Control of Structure and Style</b></h2>
+  <br>
+  <div class="hybrid-video-mask">
+    <video class="summary-img no-interaction-video masked-edge-video" autoplay muted loop playsinline>
+      <source src="static/uno_files/hybrid.webm" type="video/webm">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <br>
+  <p style="color:#000000;">
+      Mix of Three Different A-VATs with Four S-VATs: giving the same S-VAT, the generated outputs share visual appearance (color, texture) but exhibit distinct geometry, demonstrating independent control of style and structure.
+  </p>
+  <br>
+</div>
+<br>
+
+<br>
+<div class="content_two">
+
+  <h2 style="text-align:center; color:#000000;"><b>Seamless Integration with Reference Exemplars</b></h2>
+  <br>
+  <div class="guess-carousel guess-style-pill" data-guess-carousel>
+    <button class="guess-nav guess-nav-prev" type="button" aria-label="Show previous guess">‹</button>
+    <div class="guess-viewport">
+      <div class="guess-card is-active">
+        <div
+          class="guess-hotspot"
+          data-mask-srcs="static/uno_files/g1t1_mask.png|static/uno_files/g1t2_mask.png|static/uno_files/g1t3_mask.png|static/uno_files/g1t4_mask.png|static/uno_files/g1t5_mask.png|static/uno_files/g1t6_mask.png|static/uno_files/g1t7_mask.png"
+          data-correct-emoji="✅"
+          data-wrong-emoji="❌"
+          data-overlay-srcs="static/uno_files/g1t1.png|static/uno_files/g1t2.png|static/uno_files/g1t3.png|static/uno_files/g1t4.png|static/uno_files/g1t5.png|static/uno_files/g1t6.png|static/uno_files/g1t7.png"
+          data-overlay-duration="3000"
+        >
+          <img class="summary-img" src="static/uno_files/guess1.png" alt="Guess image 1">
+        </div>
+        <p class="guess-help">Click the stylized object you think was generated by AiS.</p>
+      </div>
+      <div class="guess-card">
+        <div
+          class="guess-hotspot"
+          data-mask-srcs="static/uno_files/g2t1_mask.png|static/uno_files/g2t2_mask.png|static/uno_files/g2t3_mask.png|static/uno_files/g2t4_mask.png|static/uno_files/g2t5_mask.png|static/uno_files/g2t6_mask.png"
+          data-correct-emoji="✅"
+          data-wrong-emoji="❌"
+          data-overlay-srcs="static/uno_files/g2t1.png|static/uno_files/g2t2.png|static/uno_files/g2t3.png|static/uno_files/g2t4.png|static/uno_files/g2t5.png|static/uno_files/g2t6.png"
+          data-overlay-duration="3000"
+        >
+          <img class="summary-img" src="static/uno_files/guess2.png" alt="Guess image 2">
+        </div>
+        <p class="guess-help">Click the stylized object you think was generated by AiS.</p>
+      </div>
+      <div class="guess-card">
+        <div
+          class="guess-hotspot"
+          data-mask-srcs="static/uno_files/g3t1_mask.png|static/uno_files/g3t2_mask.png|static/uno_files/g3t3_mask.png|static/uno_files/g3t4_mask.png|static/uno_files/g3t5_mask.png|static/uno_files/g3t6_mask.png"
+          data-correct-emoji="✅"
+          data-wrong-emoji="❌"
+          data-overlay-srcs="static/uno_files/g3t1.png|static/uno_files/g3t2.png|static/uno_files/g3t3.png|static/uno_files/g3t4.png|static/uno_files/g3t5.png|static/uno_files/g3t6.png"
+          data-overlay-duration="3000"
+        >
+          <img class="summary-img" src="static/uno_files/guess3.png" alt="Guess image 3">
+        </div>        <p class="guess-help">Click the stylized object you think was generated by AiS.</p>
+      </div>
+    </div>
+    <button class="guess-nav guess-nav-next" type="button" aria-label="Show next guess">›</button>
+  </div>
+  <br>
+  <p style="color:#000000;">
+      This is a guessing game: identify which stylized objects in the image are results generated by our method, AiS. If you guess correctly, the game briefly reveals the corresponding real image for that stylized object; otherwise, it shows the wrong emoji.
+  </p>
+  <br>
+</div>
+<br>
+
+<br>
+<div class="content_two">
+  <h2 style="text-align:center; color:#000000;"><b>Comparison with State-of-the-Art Methods</b></h2>
+  <br>
+  <div class="gallery-carousel gallery-style-pill" data-gallery-carousel data-gallery-mode="smooth">
+    <button class="gallery-nav gallery-nav-prev" type="button" aria-label="Show previous comparison image">‹</button>
+    <div class="gallery-viewport gallery-viewport-smooth">
+      <div class="gallery-card is-active">
+        <img class="summary-img" src="static/uno_files/Comparison.png" alt="Comparison results page 1">
+      </div>
+      <div class="gallery-card">
+        <img class="summary-img" src="static/uno_files/Comparison_1.png" alt="Comparison results page 2">
+      </div>
+      <div class="gallery-card">
+        <img class="summary-img" src="static/uno_files/Comparison_2.png" alt="Comparison results page 3">
+      </div>
+    </div>
+    <button class="gallery-nav gallery-nav-next" type="button" aria-label="Show next comparison image">›</button>
+  </div>
+  <br>
+  <p style="color:#000000;">
+   Existing methods struggle with abstract styles and over-rigidly preserve input structure, producing unsatisfactory results. Our method excels at capturing nuanced artistic styles while maintaining natural structural variations.
+  </p>
+  <br>
+</div>
+<br>
+
+<br>
+<div class="content_two">
+  <h2 class="bibtex-title"><b>Citation</b></h2>
+  <br>
+  <div class="bibtex-card">
+    <pre class="bibtex-block"><code><span class="bibtex-punctuation"></span><span class="bibtex-type">@misc</span><span class="bibtex-punctuation">{</span><span class="bibtex-key">lu2026abstractionstyle</span><span class="bibtex-punctuation">,</span>
+  <span class="bibtex-field">title</span><span class="bibtex-punctuation">=</span><span class="bibtex-punctuation">{</span><span class="bibtex-string">Abstraction in Style</span><span class="bibtex-punctuation">}</span><span class="bibtex-punctuation">,</span>
+  <span class="bibtex-field">author</span><span class="bibtex-punctuation">=</span><span class="bibtex-punctuation">{</span><span class="bibtex-string">Min Lu and Yuanfeng He and Anthony Chen and Jianhuang He and Pu Wang and Daniel Cohen-Or and Hui Huang</span><span class="bibtex-punctuation">}</span><span class="bibtex-punctuation">,</span>
+  <span class="bibtex-field">year</span><span class="bibtex-punctuation">=</span><span class="bibtex-punctuation">{</span><span class="bibtex-number">2026</span><span class="bibtex-punctuation">}</span><span class="bibtex-punctuation">,</span>
+  <span class="bibtex-field">eprint</span><span class="bibtex-punctuation">=</span><span class="bibtex-punctuation">{</span><span class="bibtex-number">2603.29924</span><span class="bibtex-punctuation">}</span><span class="bibtex-punctuation">,</span>
+  <span class="bibtex-field">archivePrefix</span><span class="bibtex-punctuation">=</span><span class="bibtex-punctuation">{</span><span class="bibtex-string">arXiv</span><span class="bibtex-punctuation">}</span><span class="bibtex-punctuation">,</span>
+  <span class="bibtex-field">primaryClass</span><span class="bibtex-punctuation">=</span><span class="bibtex-punctuation">{</span><span class="bibtex-string">cs.CV</span><span class="bibtex-punctuation">}</span><span class="bibtex-punctuation">,</span>
+  <span class="bibtex-field">url</span><span class="bibtex-punctuation">=</span><span class="bibtex-punctuation">{</span><span class="bibtex-string">https://arxiv.org/abs/2603.29924</span><span class="bibtex-punctuation">}</span><span class="bibtex-punctuation">,</span>
+<span class="bibtex-punctuation">}</span></code></pre>
+  </div>
+</div>
+<br>
+
+
+<br>
+<div class="content_two">
+
+  <p style="text-align: center; color: #000000;" >
+    Thanks to
+    <span class="publication-authors"><a href="https://github.com/River-Zhang/ICEdit-gh-pages/" target="_blank">IC-Edit</a></span> for the page template.
+  </p>
+</div>
+<br>
+<script>
+  var guessMaskCache = new Map();
+  var guessOverlayCache = new Map();
+
+  function loadGuessMask(src) {
+    if (!src) {
+      return Promise.resolve(null);
+    }
+    if (guessMaskCache.has(src)) {
+      return guessMaskCache.get(src);
+    }
+
+    var maskPromise = new Promise(function (resolve) {
+      var image = new Image();
+
+      image.onload = function () {
+        var canvas = document.createElement('canvas');
+        var context = canvas.getContext('2d', { willReadFrequently: true });
+
+        canvas.width = image.naturalWidth;
+        canvas.height = image.naturalHeight;
+        context.drawImage(image, 0, 0);
+
+        resolve({
+          width: canvas.width,
+          height: canvas.height,
+          data: context.getImageData(0, 0, canvas.width, canvas.height).data,
+        });
+      };
+
+      image.onerror = function () {
+        resolve(null);
+      };
+
+      image.src = src;
+    });
+
+    guessMaskCache.set(src, maskPromise);
+    return maskPromise;
+  }
+
+  function loadGuessOverlay(src) {
+    if (!src) {
+      return Promise.resolve(null);
+    }
+    if (guessOverlayCache.has(src)) {
+      return guessOverlayCache.get(src);
+    }
+
+    var overlayPromise = new Promise(function (resolve) {
+      var image = new Image();
+
+      image.onload = function () {
+        resolve(src);
+      };
+
+      image.onerror = function () {
+        resolve(null);
+      };
+
+      image.src = src;
+    });
+
+    guessOverlayCache.set(src, overlayPromise);
+    return overlayPromise;
+  }
+
+  function isWhiteMaskPixel(maskData, xPercent, yPercent) {
+    if (!maskData) {
+      return false;
+    }
+
+    var pixelX = Math.min(
+      maskData.width - 1,
+      Math.max(0, Math.floor((xPercent / 100) * maskData.width))
+    );
+    var pixelY = Math.min(
+      maskData.height - 1,
+      Math.max(0, Math.floor((yPercent / 100) * maskData.height))
+    );
+    var pixelIndex = (pixelY * maskData.width + pixelX) * 4;
+    var red = maskData.data[pixelIndex];
+    var green = maskData.data[pixelIndex + 1];
+    var blue = maskData.data[pixelIndex + 2];
+    var alpha = maskData.data[pixelIndex + 3];
+    var luminance = (red + green + blue) / 3;
+
+    return alpha >= 128 && luminance >= 220;
+  }
+
+  function resetGuessHotspot(hotspot) {
+    hotspot.querySelectorAll('.guess-feedback').forEach(function (marker) {
+      marker.remove();
+    });
+
+    hotspot.querySelectorAll('.guess-overlay').forEach(function (overlay) {
+      overlay.style.animation = 'none';
+      overlay.style.opacity = '0';
+      overlay.removeAttribute('src');
+    });
+  }
+
+  document.querySelectorAll('[data-guess-carousel]').forEach(function (carousel) {
+    var cards = Array.from(carousel.querySelectorAll('.guess-card'));
+    var prevButton = carousel.querySelector('.guess-nav-prev');
+    var nextButton = carousel.querySelector('.guess-nav-next');
+    var currentIndex = cards.findIndex(function (card) {
+      return card.classList.contains('is-active');
+    });
+
+    if (currentIndex < 0) {
+      currentIndex = 0;
+    }
+
+    function renderCard(index) {
+      cards.forEach(function (card, cardIndex) {
+        card.classList.toggle('is-active', cardIndex === index);
+        card.querySelectorAll('.guess-hotspot').forEach(resetGuessHotspot);
+      });
+    }
+
+    prevButton.addEventListener('click', function () {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      renderCard(currentIndex);
+    });
+
+    nextButton.addEventListener('click', function () {
+      currentIndex = (currentIndex + 1) % cards.length;
+      renderCard(currentIndex);
+    });
+
+    renderCard(currentIndex);
+  });
+
+  document.querySelectorAll('[data-gallery-carousel]').forEach(function (carousel) {
+    var cards = Array.from(carousel.querySelectorAll('.gallery-card'));
+    var prevButton = carousel.querySelector('.gallery-nav-prev');
+    var nextButton = carousel.querySelector('.gallery-nav-next');
+    var viewport = carousel.querySelector('.gallery-viewport');
+    var smoothMode = carousel.dataset.galleryMode === 'smooth';
+    var currentIndex = cards.findIndex(function (card) {
+      return card.classList.contains('is-active');
+    });
+
+    if (currentIndex < 0) {
+      currentIndex = 0;
+    }
+
+    function setSmoothViewportHeight(index) {
+      if (!smoothMode || !viewport) {
+        return;
+      }
+
+      var activeImage = cards[index] && cards[index].querySelector('img');
+
+      if (!activeImage) {
+        return;
+      }
+
+      function updateHeight() {
+        viewport.style.height = activeImage.offsetHeight + 'px';
+      }
+
+      if (activeImage.complete) {
+        updateHeight();
+      } else {
+        activeImage.addEventListener('load', updateHeight, { once: true });
+      }
+    }
+
+    function renderCard(index) {
+      cards.forEach(function (card, cardIndex) {
+        card.classList.toggle('is-active', cardIndex === index);
+      });
+      setSmoothViewportHeight(index);
+    }
+
+    prevButton.addEventListener('click', function () {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      renderCard(currentIndex);
+    });
+
+    nextButton.addEventListener('click', function () {
+      currentIndex = (currentIndex + 1) % cards.length;
+      renderCard(currentIndex);
+    });
+
+    renderCard(currentIndex);
+
+    if (smoothMode) {
+      window.addEventListener('resize', function () {
+        setSmoothViewportHeight(currentIndex);
+      });
+    }
+  });
+
+  document.querySelectorAll('.guess-hotspot').forEach(function (hotspot) {
+    var maskSources = hotspot.dataset.maskSrcs
+      ? hotspot.dataset.maskSrcs.split('|').map(function (value) {
+          return value.trim();
+        }).filter(Boolean)
+      : [];
+    var regions = hotspot.dataset.correctRegions
+      ? hotspot.dataset.correctRegions.split('|').map(function (regionText) {
+          return regionText.split(',').map(function (value) {
+            return Number(value.trim());
+          });
+        })
+      : [(hotspot.dataset.correctRegion || '0,0,0,0').split(',').map(function (value) {
+          return Number(value.trim());
+        })];
+    var overlaySources = hotspot.dataset.overlaySrcs
+      ? hotspot.dataset.overlaySrcs.split('|').map(function (value) {
+          return value.trim();
+        })
+      : [hotspot.dataset.overlaySrc || ''];
+    var maskPromise = Promise.all(maskSources.map(loadGuessMask));
+    var overlayPromise = Promise.all(overlaySources.map(loadGuessOverlay));
+
+    hotspot.addEventListener('click', async function (event) {
+      var rect = hotspot.getBoundingClientRect();
+      var x = ((event.clientX - rect.left) / rect.width) * 100;
+      var y = ((event.clientY - rect.top) / rect.height) * 100;
+      var matchedMaskIndex = -1;
+      var maskChecks = await maskPromise;
+      var readyOverlays = await overlayPromise;
+
+      maskChecks.some(function (maskData, maskIndex) {
+        if (isWhiteMaskPixel(maskData, x, y)) {
+          matchedMaskIndex = maskIndex;
+          return true;
+        }
+        return false;
+      });
+
+      var matchedRegionIndex = regions.findIndex(function (region) {
+        return (
+          region.length === 4 &&
+          x >= region[0] &&
+          x <= region[2] &&
+          y >= region[1] &&
+          y <= region[3]
+        );
+      });
+      var matchIndex = matchedMaskIndex >= 0 ? matchedMaskIndex : matchedRegionIndex;
+      var isInside = matchIndex >= 0;
+      var marker = document.createElement('span');
+
+      marker.className = 'guess-feedback';
+      marker.textContent = isInside
+        ? hotspot.dataset.correctEmoji || '✅'
+        : hotspot.dataset.wrongEmoji || '❌';
+      marker.style.left = x + '%';
+      marker.style.top = y + '%';
+
+      hotspot.appendChild(marker);
+      if (isInside && readyOverlays[matchIndex]) {
+        var existingOverlay = hotspot.querySelector('.guess-overlay');
+        var overlayDuration = Number(hotspot.dataset.overlayDuration || 3000);
+        var overlayImage = existingOverlay || document.createElement('img');
+
+        if (!existingOverlay) {
+          overlayImage.className = 'guess-overlay';
+          overlayImage.alt = '';
+          hotspot.appendChild(overlayImage);
+        }
+
+        overlayImage.src = readyOverlays[matchIndex];
+        overlayImage.style.animation = 'none';
+        overlayImage.style.opacity = '0';
+        overlayImage.offsetHeight;
+        overlayImage.style.animation = 'guess-overlay-fade ' + overlayDuration + 'ms ease-in-out forwards';
+      }
+      window.setTimeout(function () {
+        marker.remove();
+      }, 900);
+    });
+  });
+</script>
+</body>
+</html>

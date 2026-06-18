@@ -59,19 +59,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--ref-indices", nargs="+", type=int, default=[1], help="Reference image indices to use.")
     parser.add_argument("--seed", type=int, default=42, help="Random seed.")
     parser.add_argument("--dataset-root", default="dataset", help="Dataset root directory.")
-    parser.add_argument("--input-dir", default="test_assets/input_images", help="Directory of input test images.")
-    parser.add_argument("--output-dir", default="test_assets/generated_images", help="Directory for generated outputs.")
+    parser.add_argument("--input-dir", default=None, help="Directory of input test images. Defaults depend on --stage.")
+    parser.add_argument("--output-dir", default="test_assets/generated_images", help="Root directory for generated outputs and cached preprocessing artifacts.")
     parser.add_argument("--base-model", default="black-forest-labs/FLUX.1-Fill-dev", help="Path or model id for the base FLUX fill model.")
     parser.add_argument("--mask-path", default=None, help="Optional mask image path.")
     parser.add_argument("--vectorize-config", default=None, help="Optional YAML config path for layered vectorization.")
     parser.add_argument("--input-pattern", default="*", help="Glob pattern for selecting input images inside --input-dir.")
     parser.add_argument("--a-vat-scale", type=float, default=1.0, help="Input content scale for A-VAT inference.")
     parser.add_argument("--s-vat-scale", type=float, default=1.0, help="Input content scale for S-VAT inference.")
-    parser.add_argument("--height", type=int, default=1024, help="Output image height.")
-    parser.add_argument("--width", type=int, default=1024, help="Output image width.")
     parser.add_argument("--num-steps", type=int, default=50, help="Number of inference steps.")
     parser.add_argument("--guidance-scale", type=float, default=1.0, help="Guidance scale.")
     parser.add_argument("--max-sequence-length", type=int, default=512, help="Maximum sequence length.")
+    parser.add_argument("--run-preprocess", action="store_true", help="Force vectorization and backbone extraction for single-stage inference.")
+    parser.add_argument("--save-context-images", action="store_true", help="Save full four-panel inference images instead of cropped outputs.")
     parser.add_argument("--torch-dtype", choices=("bf16", "fp16", "fp32"), default="bf16", help="Torch dtype.")
     parser.add_argument("--device-map", default="balanced", help="Diffusers device_map value.")
     parser.add_argument("--cuda-visible-devices", default="0", help="CUDA_VISIBLE_DEVICES value.")
@@ -84,8 +84,14 @@ if __name__ == "__main__":
         os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_visible_devices
 
     style_dir = Path(args.dataset_root) / args.style
-    input_dir = Path(args.input_dir)
-    output_dir = Path(args.output_dir)
+    output_root = Path(args.output_dir)
+    input_dir = Path(args.input_dir) if args.input_dir else (
+        output_root / "A-VAT_outputs" if args.stage == "S-VAT" else Path("test_assets/input_images")
+    )
+    a_vat_output_dir = output_root / "A-VAT_outputs"
+    s_vat_output_dir = output_root / "S-VAT_outputs"
+    test_vectorized_dir = output_root / "input_img_vectorized"
+    test_backbone_dir = output_root / "input_img_backbone"
     mask_path = Path(args.mask_path) if args.mask_path else Path(args.dataset_root) / "mask_1024.png"
 
     if not style_dir.is_dir():
@@ -112,9 +118,11 @@ if __name__ == "__main__":
     if not input_images:
         raise FileNotFoundError(f"No input images found in {input_dir} matching {args.input_pattern}")
 
-    test_vectorized_dir = input_dir / "input_img_vectorized"
-    test_backbone_dir = input_dir / "backbone"
-    if args.stage == "all":
+    run_preprocess = args.stage == "all" or args.stage == "A-VAT" or args.run_preprocess
+    use_backbone_input = args.stage in ("all", "A-VAT") or (args.stage == "S-VAT" and args.run_preprocess)
+
+    output_root.mkdir(parents=True, exist_ok=True)
+    if run_preprocess:
         test_vectorized_dir.mkdir(parents=True, exist_ok=True)
         test_backbone_dir.mkdir(parents=True, exist_ok=True)
 
@@ -202,16 +210,19 @@ if __name__ == "__main__":
                     write_metadata(input_image_path)
             finally:
                 shutil.rmtree(filter_input_dir, ignore_errors=True)
-    elif args.stage == "A-VAT":
-        print("[Preprocess] A-VAT mode: skipping vectorization and backbone extraction, using input_images directly.")
+        if args.stage == "A-VAT":
+            print("[Preprocess] A-VAT mode: extracting backbone from input_images.")
+        elif args.stage == "S-VAT":
+            print("[Preprocess] S-VAT mode with --run-preprocess: extracting backbone from input_images.")
     else:
         print("[Preprocess] S-VAT mode: skipping vectorization and backbone extraction, using input_images directly.")
 
-    output_dir.mkdir(parents=True, exist_ok=True)
+    a_vat_output_dir.mkdir(parents=True, exist_ok=True)
+    s_vat_output_dir.mkdir(parents=True, exist_ok=True)
     mask_image = load_image(str(mask_path))
     torch_dtype = {"bf16": torch.bfloat16, "fp16": torch.float16, "fp32": torch.float32}[args.torch_dtype]
 
-    print(f"Running style={args.style} stage={args.stage} refs={args.ref_indices}")
+    print(f"Running style={args.style} stage={args.stage} refs={args.ref_indices} input_dir={input_dir}")
 
     a_vat_pipeline = None
     s_vat_pipeline = None
@@ -230,7 +241,7 @@ if __name__ == "__main__":
                 a_vat_output = None
                 if a_vat_pipeline is not None:
                     a_vat_input = concat_test_img(
-                        input_image=input_image_path if args.stage == "A-VAT" else test_backbone_dir / f"{input_image_path.stem}.png",
+                        input_image=test_backbone_dir / f"{input_image_path.stem}.png" if use_backbone_input else input_image_path,
                         style_dir=style_dir,
                         phase="A-VAT",
                         ref_img_idx=ref_index,
@@ -240,14 +251,20 @@ if __name__ == "__main__":
                         prompt=A_VAT_PROMPT,
                         image=a_vat_input,
                         mask_image=mask_image,
-                        height=args.height,
-                        width=args.width,
+                        height=1024,
+                        width=1024,
                         guidance_scale=args.guidance_scale,
                         num_inference_steps=args.num_steps,
                         max_sequence_length=args.max_sequence_length,
                         generator=torch.Generator("cpu").manual_seed(args.seed),
                     ).images[0]
-                    a_vat_output.save(output_dir / f"{base_name}_A-VAT_output.png")
+                    (
+                        a_vat_output
+                        if args.save_context_images
+                        else crop_bottom_right(a_vat_output.convert("RGB")).resize((512, 512), Image.Resampling.LANCZOS)
+                    ).save(
+                        a_vat_output_dir / f"{base_name}_A-VAT_output.png"
+                    )
 
                 if s_vat_pipeline is None:
                     continue
@@ -258,7 +275,7 @@ if __name__ == "__main__":
                         raise RuntimeError("Missing A-VAT output for chained S-VAT inference.")
                     s_vat_source = crop_bottom_right(a_vat_output.convert("RGB"))
                 elif args.stage == "S-VAT":
-                    s_vat_source = input_image_path
+                    s_vat_source = test_backbone_dir / f"{input_image_path.stem}.png" if use_backbone_input else input_image_path
 
                 s_vat_input = concat_test_img(
                     input_image=s_vat_source,
@@ -271,14 +288,20 @@ if __name__ == "__main__":
                     prompt=S_VAT_PROMPT,
                     image=s_vat_input,
                     mask_image=mask_image,
-                    height=args.height,
-                    width=args.width,
+                    height=1024,
+                    width=1024,
                     guidance_scale=args.guidance_scale,
                     num_inference_steps=args.num_steps,
                     max_sequence_length=args.max_sequence_length,
                     generator=torch.Generator("cpu").manual_seed(args.seed),
                 ).images[0]
-                s_vat_output.save(output_dir / f"{base_name}_S-VAT_output.png")
+                (
+                    s_vat_output
+                    if args.save_context_images
+                    else crop_bottom_right(s_vat_output.convert("RGB")).resize((512, 512), Image.Resampling.LANCZOS)
+                ).save(
+                    s_vat_output_dir / f"{base_name}_S-VAT_output.png"
+                )
     finally:
         if a_vat_pipeline is not None:
             del a_vat_pipeline
