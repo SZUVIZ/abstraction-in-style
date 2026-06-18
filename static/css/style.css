@@ -69,8 +69,7 @@ a, a:visited {
 }
 
 .paper-title-main {
-  /*font-size: 45px;*/
-  font-size: 60px;
+  font-size: 45px;
   /*color: #e72018;*/
   color: #030303;
   font-weight: bold;
@@ -88,9 +87,10 @@ a, a:visited {
 
 #authors .author-item {
   color: #020202;
-  font-family: 'Gill Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   display: inline-block;
-  margin: 0 0.35rem;
+  /* margin: 0 10 rem; */
+  padding: 0 5px;
 }
 
 #authors .author-item a {
@@ -103,19 +103,26 @@ a, a:visited {
   font-size: 0.72em;
   line-height: 0;
   vertical-align: super;
-  margin-left: 1px;
+  /* margin-left: -3px; */
+  margin: 2px;
 }
 
 #authors .affiliation-line {
   color: #656768;
-  font-family: 'Gill Sans', sans-serif;
-  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 15px;
 }
 
 #authors .conference-line {
-  color: #f50808;
-  font-family: 'Gill Sans', sans-serif;
+  color: #b90505;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
+  display: inline-block;
+  margin-top: 10px;
+}
+.publication-links .icon svg {
+  width: 0.85em;
+  height: 0.85em;
 }
 #conference {
   text-align: center;
@@ -124,7 +131,7 @@ a, a:visited {
 }
 #authors a {
   text-decoration: none; color: black;
-  margin: 0 10px;
+  margin: 0 0px;
 }
 h1 {
   text-align: center;

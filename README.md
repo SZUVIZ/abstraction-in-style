@@ -1,7 +1,7 @@
 # Abstraction in Style: Beyond Texture and Color (SIGGRAPH 2026)
 <div align="center">
 
-### [Paper](https://arxiv.org/abs/2603.29924) | [Project Page](https://chapai24.github.io/AiS_gh_pages/)
+### [Paper](https://arxiv.org/abs/2603.29924) | [Project Page](https://chapai24.github.io/Abstraction-in-Style/)
 
 [Min Lu](https://deardeer.github.io/)<sup>1</sup> · Yuanfeng He<sup>1</sup> · [Anthony Chen](https://antonioo-c.github.io/)<sup>2</sup>· Jianhuang He<sup>1</sup>· Pu Wang<sup>1</sup> · [Daniel Cohen-Or](https://danielcohenor.com/)<sup>3</sup> · [Hui Huang](https://vcc.tech/~huihuang)<sup>1</sup>
 
@@ -44,16 +44,6 @@ bash install_env.sh
 
 ## Inference 
 
-Default input directories:
-
-```text
---stage all    -> test_assets/input_images/
---stage A-VAT  -> test_assets/input_images/
---stage S-VAT  -> test_assets/generated_images/A-VAT_outputs/
-```
-
-You can override the default behavior with `--input-dir`.
-
 Run the full two-stage pipeline:
 
 ```bash
@@ -67,6 +57,16 @@ Or run a single stage:
 python test_AiS.py --style <style_name> --stage A-VAT
 python test_AiS.py --style <style_name> --stage S-VAT
 ```
+
+Default input directories:
+
+```text
+--stage all    -> test_assets/input_images/
+--stage A-VAT  -> test_assets/input_images/
+--stage S-VAT  -> test_assets/generated_images/A-VAT_outputs/
+```
+
+You can override the default behavior with `--input-dir`.
 
 Outputs are saved to:
 
