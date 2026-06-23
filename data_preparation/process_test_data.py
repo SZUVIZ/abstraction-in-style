@@ -17,6 +17,25 @@ def find_stem_image(directory: Path, stem: int | str) -> Path:
         candidate = directory / f"{stem}{extension}"
         if candidate.exists():
             return candidate
+
+    # Also match files like "01.jpg" when the requested ref index is 1.
+    try:
+        numeric_stem = int(stem)
+    except ValueError:
+        numeric_stem = None
+
+    for candidate in sorted(directory.iterdir()):
+        if not candidate.is_file() or candidate.suffix.lower() not in SUPPORTED_IMAGE_EXTENSIONS:
+            continue
+        if candidate.stem == stem:
+            return candidate
+        if numeric_stem is not None:
+            try:
+                if int(candidate.stem) == numeric_stem:
+                    return candidate
+            except ValueError:
+                continue
+
     raise FileNotFoundError(f"Could not find image '{stem}' in {directory}")
 
 
