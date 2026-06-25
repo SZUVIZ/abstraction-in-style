@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 import glob
@@ -145,7 +146,15 @@ def resize_image_for_concat(image, target_size, fill_color=(255, 255, 255)):
     return new_img
 
 
-def concat_images(folder_a, folder_b, output_folder, target_size=(512, 512)):
+def numeric_sort_key(name: str):
+    stem = os.path.splitext(os.path.basename(name))[0]
+    try:
+        return (0, int(stem))
+    except ValueError:
+        return (1, stem)
+
+
+def concat_images(folder_a, folder_b, output_folder, target_size=(512, 512), manifest_path=None):
     if not os.path.exists(output_folder): os.makedirs(output_folder)
     supported_extensions = {'.jpg', '.jpeg', '.png', '.bmp', '.gif', '.tiff'}
     b_files = {os.path.splitext(f)[0]: os.path.join(folder_b, f) for f in os.listdir(folder_b) if
@@ -154,7 +163,11 @@ def concat_images(folder_a, folder_b, output_folder, target_size=(512, 512)):
         print(f"[Concat] Warning: no supported images found in target directory {folder_b}; skipping concatenation.")
         return
     combined_images = []
-    a_files_list = sorted([f for f in os.listdir(folder_a) if os.path.splitext(f)[1].lower() in supported_extensions])
+    pair_metadata = []
+    a_files_list = sorted(
+        [f for f in os.listdir(folder_a) if os.path.splitext(f)[1].lower() in supported_extensions],
+        key=numeric_sort_key,
+    )
     for a_file in a_files_list:
         base_name = os.path.splitext(a_file)[0]
         b_path = b_files.get(base_name)
@@ -167,19 +180,43 @@ def concat_images(folder_a, folder_b, output_folder, target_size=(512, 512)):
             h_combined.paste(img_a, (0, 0));
             h_combined.paste(img_b, (target_size[0], 0))
             combined_images.append(h_combined)
+            pair_metadata.append(
+                {
+                    "left_image_stem": base_name,
+                    "left_image_name": a_file,
+                    "right_image_stem": os.path.splitext(os.path.basename(b_path))[0],
+                    "right_image_name": os.path.basename(b_path),
+                }
+            )
     v_combined_count = 0
+    manifest = {}
     for i in range(0, len(combined_images), 2):
         if i + 1 < len(combined_images):
             img1, img2 = combined_images[i], combined_images[i + 1]
+            meta1, meta2 = pair_metadata[i], pair_metadata[i + 1]
         elif len(combined_images) > 1:
             img1, img2 = combined_images[i], combined_images[0]
+            meta1, meta2 = pair_metadata[i], pair_metadata[0]
         else:
             break
         v_combined = Image.new('RGB', (target_size[0] * 2, target_size[1] * 2), (255, 255, 255))
         v_combined.paste(img1, (0, 0));
         v_combined.paste(img2, (0, target_size[1]))
-        v_combined.save(os.path.join(output_folder, f"{v_combined_count}.jpg"), quality=95)
+        output_name = f"{v_combined_count}.jpg"
+        v_combined.save(os.path.join(output_folder, output_name), quality=95)
+        manifest[output_name] = {
+            "top_left_stem": meta1["left_image_stem"],
+            "top_left_name": meta1["left_image_name"],
+            "top_right_stem": meta1["right_image_stem"],
+            "top_right_name": meta1["right_image_name"],
+            "bottom_left_stem": meta2["left_image_stem"],
+            "bottom_left_name": meta2["left_image_name"],
+            "bottom_right_source": "generated",
+        }
         v_combined_count += 1
+    if manifest_path is not None:
+        with open(manifest_path, "w", encoding="utf-8") as fp:
+            json.dump(manifest, fp, indent=2, ensure_ascii=False)
 
 
 def create_prompts_for_concat_folder(concat_folder: str, prompt_text: str) -> Optional[str]:
@@ -230,7 +267,12 @@ def organize(style_name=None, base_dir=None):
     backbone_process(svg_dir, backbone_dir)
 
     print("[Organize] A-VAT")
-    concat_images(backbone_dir, svg2png_dir, concat_a_vat_dir)
+    concat_images(
+        backbone_dir,
+        svg2png_dir,
+        concat_a_vat_dir,
+        manifest_path=os.path.join(concat_a_vat_dir, "manifest.json"),
+    )
     prompt_a_vat = (
         "This is a four-panel image on a uniform solid-color background, hand-drawn in style, with the subject highlighted and kept as simple as possible: "
         "[TOP-LEFT]: Image of the skeleton of a subject. "
@@ -256,4 +298,4 @@ def organize(style_name=None, base_dir=None):
 
 
 if __name__ == "__main__":
-    organize()
+    organize(style_name="ns18（hui）_shape-style", base_dir="../dataset")
