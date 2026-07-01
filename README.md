@@ -1,7 +1,7 @@
 # Abstraction in Style: Beyond Texture and Color (SIGGRAPH 2026)
 <div align="center">
 
-### [Paper](https://arxiv.org/abs/2603.29924) | [Project Page](https://github.com/SZUVIZ/abstraction-in-style)
+### [Paper](https://arxiv.org/abs/2603.29924) | [Project Page](https://szuviz.github.io/abstraction-in-style/)
 
 [Min Lu](https://deardeer.github.io/)<sup>1</sup> · Yuanfeng He<sup>1</sup> · [Anthony Chen](https://antonioo-c.github.io/)<sup>2</sup>· Jianhuang He<sup>1</sup>· Pu Wang<sup>1</sup> · [Daniel Cohen-Or](https://danielcohenor.com/)<sup>3</sup> · [Hui Huang](https://vcc.tech/~huihuang)<sup>1</sup>
 
